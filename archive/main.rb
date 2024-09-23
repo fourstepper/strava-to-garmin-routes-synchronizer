@@ -17,8 +17,6 @@ def get_strava_routes(client)
   return routes
 end
 
-# puts get_strava_routes(client).to_json
-
 =begin
 PROGRAM STEPS
 1. read all current routes from the Strava API
@@ -34,8 +32,8 @@ PROGRAM STEPS
     - deletes the route from DB
 =end
 
-routes = JSON.parse(File.read('strava-routes.json'))
-
-routes.each do |route|
-  print "Route name: #{route['name']},  Updated at: #{route['updated_at']}\n"
-end
+# routes = JSON.parse(File.read('strava-routes.json'))
+#
+# routes.each do |route|
+#   print "Route name: #{route['name']},  Updated at: #{route['updated_at']}\n"
+# end
