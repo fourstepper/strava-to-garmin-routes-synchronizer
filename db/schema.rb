@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_23_115951) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_23_123321) do
   create_table "routes", force: :cascade do |t|
     t.string "name"
-    t.datetime "timestamp_updated_at"
+    t.datetime "timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "json"
   end
 end
