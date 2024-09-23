@@ -14,8 +14,9 @@ def get_strava_routes(client)
   client.athlete_routes(id: client.athlete.id, per_page: 100) do |route|
     routes << route
   end
-  return routes
 end
+
+puts get_strava_routes(client).to_json
 
 =begin
 PROGRAM STEPS

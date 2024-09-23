@@ -5,20 +5,20 @@ class RoutesController < ApplicationController
   before_action :set_route, only: %i[ show edit update destroy ]
 
   def create_route(route)
-    gpx = Base64.encode64(StravaClient.export_route_gpx(route['id']))
-    return Route.create(name: route['name'], route_updated_at: route['updated_at'], route_id: route['id'], gpx: gpx)
+    gpx = Base64.encode64(StravaClient.export_route_gpx(route["id"]))
+    Route.create(name: route["name"], route_updated_at: route["updated_at"], route_id: route["id"], gpx: gpx)
   end
 
   def custom
-    @routes = JSON.parse(File.read(Rails.root.join('archive', 'strava-routes.json')))
+    @routes = JSON.parse(File.read(Rails.root.join("archive", "strava-routes.json")))
     @routes.each do |route|
-      if not Route.exists?(name: route['name'])
+      if not Route.exists?(name: route["name"])
         # Route.create(name: route['name'], route_updated_at: route['updated_at'], route_id: route['id'], gpx: data)
         create_route(route)
       end
 
-      saved_route = Route.find_by(name: route['name'])
-      current_route_updated_at = Time.parse(route['updated_at']).iso8601
+      saved_route = Route.find_by(name: route["name"])
+      current_route_updated_at = Time.parse(route["updated_at"]).iso8601
 
       if current_route_updated_at != saved_route.route_updated_at.iso8601
         saved_route.destroy

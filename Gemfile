@@ -57,4 +57,4 @@ group :test do
 end
 
 # Custom packages
-gem 'strava-ruby-client'
+gem "strava-ruby-client"
