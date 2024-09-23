@@ -6,21 +6,20 @@ class RoutesController < ApplicationController
 
   def create_route(route)
     gpx = Base64.encode64(StravaClient.export_route_gpx(route["id"]))
-    Route.create(name: route["name"], route_updated_at: route["updated_at"], route_id: route["id"], gpx: gpx)
+    Route.create(name: route["name"], route_updated_at: Time.parse(route["updated_at"]).iso8601, route_id: route["id"], gpx: gpx)
   end
 
   def custom
     @routes = JSON.parse(File.read(Rails.root.join("archive", "strava-routes.json")))
     @routes.each do |route|
       if not Route.exists?(name: route["name"])
-        # Route.create(name: route['name'], route_updated_at: route['updated_at'], route_id: route['id'], gpx: data)
         create_route(route)
       end
 
       saved_route = Route.find_by(name: route["name"])
       current_route_updated_at = Time.parse(route["updated_at"]).iso8601
 
-      if current_route_updated_at != saved_route.route_updated_at.iso8601
+      if current_route_updated_at != saved_route.route_updated_at
         saved_route.destroy
         saved_route = create_route(route)
         saved_route.update(process: true)
@@ -57,6 +56,10 @@ class RoutesController < ApplicationController
     @route = Route.new(route_params)
 
     respond_to do |format|
+      unless @route.save
+        puts @route.errors.full_messages
+      end
+
       if @route.save
         format.html { redirect_to @route, notice: "Route was successfully created." }
         format.json { render :show, status: :created, location: @route }
@@ -98,6 +101,6 @@ class RoutesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def route_params
-      params.require(:route).permit(:name, :route_updated_at, :json)
+      params.require(:route).permit(:name, :route_updated_at, :route_id, :gpx, :process)
     end
 end

@@ -17,8 +17,13 @@
   </div>
 
   <div>
-    <%= form.label :timestamp, style: "display: block" %>
-    <%= form.datetime_field :timestamp %>
+    <%= form.label :route_id, style: "display: block" %>
+    <%= form.number_field :route_id %>
+  </div>
+
+  <div>
+    <%= form.label :route_updated_at, style: "display: block" %>
+    <%= form.datetime_field :route_updated_at %>
   </div>
 
   <div>

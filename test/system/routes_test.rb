@@ -15,7 +15,6 @@ class RoutesTest < ApplicationSystemTestCase
     click_on "New route"
 
     fill_in "Name", with: @route.name
-    fill_in "Timestamp", with: @route.timestamp
     click_on "Create Route"
 
     assert_text "Route was successfully created"
@@ -27,7 +26,6 @@ class RoutesTest < ApplicationSystemTestCase
     click_on "Edit this route", match: :first
 
     fill_in "Name", with: @route.name
-    fill_in "Timestamp", with: @route.timestamp.to_s
     click_on "Update Route"
 
     assert_text "Route was successfully updated"
