@@ -11,3 +11,5 @@
   - this marks the route for deletion in the DB
   - deletes the route from Garmin Connect
   - deletes the route from DB
+
+For communication with the Garmin API, check out [this](https://github.com/cyberjunky/python-garminconnect/blob/master/garminconnect/__init__.py)
