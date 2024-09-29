@@ -1,4 +1,6 @@
-# PROGRAM STEPS
+# Archived since Garmin Connect API (undocumented one) doesn't support course alteration for the current user
+
+### PROGRAM CHANGES
 
 1. read all current routes from the Strava API
 2. compare the current ones with the ones that we have saved in the DB
